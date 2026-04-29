@@ -959,7 +959,12 @@ async function loadStore() {
     const r = await jsonp(GAS_URL + '?action=productos');
     document.getElementById('prodsLoading').style.display = 'none';
     if (r && r.data && r.data.length) {
-      allProds = r.data.filter(p => String(p.activo) === 'true' || p.activo === true);
+      allProds = r.data.filter(p =>
+  p.activo === true ||
+  p.activo === 'TRUE' ||
+  p.activo === 'true' ||
+  p.activo === 1
+);
       buildCats();
       renderProds(allProds);
       setHeroFeatured();
